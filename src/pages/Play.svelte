@@ -233,10 +233,6 @@
     transition: opacity 0.5s ease-in-out;
   }
   
-  .placeholder {
-    color: #ccc;
-  }
-  
   .romaji {
     font-size: 24px;
     color: #666;
