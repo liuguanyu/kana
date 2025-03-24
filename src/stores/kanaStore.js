@@ -225,7 +225,7 @@ const katakanaData = [
 // 默认设置
 const defaultSettings = {
   kanaType: 'hiragana', // 'hiragana', 'katakana', 'both'
-  kanaCategory: 'all', // 'seion'(清音), 'dakuon'(浊音), 'youon'(拗音), 'all'(全部)
+  kanaCategory: 'seion', // 'seion'(清音), 'dakuon'(浊音), 'youon'(拗音), 'all'(全部)
   playOrder: 'sequential', // 'sequential', 'random'
   playInterval: 3, // 秒
   requiredCorrectCount: 3 // 连续正确次数，超过此次数从错题库删除
@@ -242,6 +242,20 @@ export const loadDataFromStorage = async () => {
     const data = await chrome.storage.sync.get(['settings', 'mistakes', 'testResults']);
     
     if (data.settings) {
+      // 检查是否缺少kanaCategory字段
+      if (!data.settings.kanaCategory) {
+        console.log('检测到设置缺少kanaCategory字段，正在修复...');
+        data.settings.kanaCategory = 'seion'; // 默认使用清音
+        
+        // 保存修复后的设置
+        try {
+          await chrome.storage.sync.set({ settings: data.settings });
+          console.log('设置已修复:', data.settings);
+        } catch (error) {
+          console.error('修复设置失败:', error);
+        }
+      }
+      
       settings.set(data.settings);
     }
     
