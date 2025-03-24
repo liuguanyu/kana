@@ -284,18 +284,21 @@
   .options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 20px;
     margin-bottom: 24px;
   }
   
   .option-btn {
     height: 80px;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    background-color: white;
-    font-size: 32px;
+    border: 2px solid #888;
+    background-color: #f8f8f8;
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
     cursor: pointer;
     transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
   
   .option-btn:hover:not(:disabled) {
@@ -303,15 +306,17 @@
   }
   
   .option-btn.correct {
-    background-color: #e8f5e9;
+    background-color: #c8e6c9;
     border-color: #4caf50;
-    color: #2e7d32;
+    color: #1b5e20;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
   }
   
   .option-btn.incorrect {
-    background-color: #ffebee;
+    background-color: #ffcdd2;
     border-color: #f44336;
-    color: #c62828;
+    color: #b71c1c;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
   }
   
   .progress-bar {

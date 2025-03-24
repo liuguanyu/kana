@@ -1,0 +1,51 @@
+# 依赖目录
+/node_modules
+/.pnp
+.pnp.js
+
+# 构建输出
+/dist
+/build
+/out
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 编辑器目录和文件
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 缓存
+.cache
+.parcel-cache
+.npm
+.eslintcache
+.stylelintcache
+
+# 测试覆盖率
+/coverage
+
+# 其他
+*.log
+*.local
+
+# 不再忽略.gitignore文件本身
