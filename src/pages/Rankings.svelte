@@ -102,21 +102,21 @@
         class={sortBy === 'accuracy' ? 'active' : ''} 
         on:click={() => changeSortBy('accuracy')}
       >
-        按正确率排序 {sortBy === 'accuracy' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        正确率 {sortBy === 'accuracy' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
       </button>
       
       <button 
         class={sortBy === 'duration' ? 'active' : ''} 
         on:click={() => changeSortBy('duration')}
       >
-        按用时排序 {sortBy === 'duration' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        用时 {sortBy === 'duration' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
       </button>
       
       <button 
         class={sortBy === 'date' ? 'active' : ''} 
         on:click={() => changeSortBy('date')}
       >
-        按日期排序 {sortBy === 'date' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        日期 {sortBy === 'date' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
       </button>
     </div>
     
@@ -174,9 +174,10 @@
   
   .sort-controls {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 16px;
+    overflow-x: auto; /* 允许横向滚动而不换行 */
+    padding-bottom: 4px; /* 为可能的滚动条留出空间 */
   }
   
   .sort-controls button {
@@ -186,12 +187,15 @@
     padding: 8px 12px;
     font-size: 14px;
     cursor: pointer;
+    color: #333; /* 更深的文字颜色 */
+    font-weight: 500; /* 稍微加粗 */
   }
   
   .sort-controls button.active {
     background-color: #e3f2fd;
     border-color: #2196f3;
-    color: #1976d2;
+    color: #0d47a1; /* 更深的蓝色，提高对比度 */
+    font-weight: 600; /* 更加粗 */
   }
   
   .results-list {
@@ -218,7 +222,7 @@
   
   .date {
     font-size: 14px;
-    color: #666;
+    color: #333; /* 更深的颜色，提高可读性 */
   }
   
   .delete-btn {
@@ -258,7 +262,7 @@
   .empty-state {
     text-align: center;
     padding: 32px 16px;
-    color: #666;
+    color: #333; /* 更深的颜色，提高可读性 */
   }
   
   .empty-state p {
