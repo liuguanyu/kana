@@ -11,12 +11,22 @@
   let isPlaying = false;
   
   // 订阅设置变化
-  onMount(() => {
+  onMount(async () => {
+    // 确保先加载最新的设置
+    await chrome.storage.sync.get(['settings']).then(data => {
+      if (data.settings) {
+        currentSettings = { ...data.settings };
+      }
+    });
+    
     const unsubscribe = settings.subscribe(value => {
       currentSettings = { ...value };
       // 当设置变化时，重新加载假名列表
       loadKanaList();
     });
+    
+    // 初始加载假名列表
+    loadKanaList();
     
     return () => {
       unsubscribe();
@@ -138,13 +148,8 @@
   {#if kanaList.length > 0 && currentKana}
     <div class="kana-display">
       <div class="kana-card">
-        {#if showKana}
-          <div class="kana">{currentKana.kana}</div>
-          <div class="romaji">{currentKana.romaji}</div>
-        {:else}
-          <div class="kana placeholder">?</div>
-          <div class="romaji">{currentKana.romaji}</div>
-        {/if}
+        <div class="kana" style="opacity: {showKana ? 1 : 0}">{showKana ? currentKana.kana : '?'}</div>
+        <div class="romaji">{currentKana.romaji}</div>
       </div>
       
       <div class="progress">
@@ -225,6 +230,7 @@
   .kana {
     font-size: 72px;
     margin-bottom: 16px;
+    transition: opacity 0.5s ease-in-out;
   }
   
   .placeholder {
@@ -234,6 +240,7 @@
   .romaji {
     font-size: 24px;
     color: #666;
+    transition: opacity 0.5s ease-in-out;
   }
   
   .progress {
