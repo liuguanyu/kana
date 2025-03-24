@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import Router from 'svelte-spa-router';
   import { wrap } from 'svelte-spa-router/wrap';
+  import { push } from 'svelte-spa-router';
+  import { settings } from './stores/kanaStore.js';
   
   // 导入页面组件
   import Navigation from './components/Navigation.svelte';
@@ -10,6 +12,19 @@
   import Test from './pages/Test.svelte';
   import Ranking from './pages/Rankings.svelte';
   import Review from './pages/Review.svelte';
+  
+  // 检查是否有设置
+  onMount(async () => {
+    try {
+      const data = await chrome.storage.sync.get(['settings']);
+      if (data.settings) {
+        // 如果有设置，导航到Play页面
+        push('/play');
+      }
+    } catch (error) {
+      console.error('检查设置失败:', error);
+    }
+  });
   
   // 路由配置
   const routes = {

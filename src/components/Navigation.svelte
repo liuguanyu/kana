@@ -2,11 +2,11 @@
   import { push, location } from 'svelte-spa-router';
   
   const navItems = [
-    { path: '/', label: '设置', icon: '⚙️' },
     { path: '/play', label: '播放', icon: '▶️' },
     { path: '/test', label: '测试', icon: '📝' },
     { path: '/ranking', label: '排名', icon: '🏆' },
-    { path: '/review', label: '复习', icon: '🔄' }
+    { path: '/review', label: '复习', icon: '🔄' },
+    { path: '/', label: '设置', icon: '⚙️' }
   ];
 </script>
 
