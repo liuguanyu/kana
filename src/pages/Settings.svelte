@@ -49,6 +49,18 @@
         </div>
         
         <div class="form-group">
+          <label for="kanaCategory">假名分类</label>
+          <div class="control-wrapper">
+            <select id="kanaCategory" bind:value={currentSettings.kanaCategory}>
+              <option value="all">全部</option>
+              <option value="seion">清音</option>
+              <option value="dakuon">浊音</option>
+              <option value="youon">拗音</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
           <label for="playOrder">播放模式</label>
           <div class="control-wrapper">
             <select id="playOrder" bind:value={currentSettings.playOrder}>

@@ -34,7 +34,7 @@
     if (!currentSettings) return;
     
     // 获取当前设置下的假名列表
-    const list = getKanaList(currentSettings.kanaType);
+    const list = getKanaList(currentSettings.kanaType, currentSettings.kanaCategory);
     
     // 根据播放模式处理列表
     if (currentSettings.playOrder === 'random') {
@@ -177,6 +177,9 @@
     <div class="settings-info">
       <p>当前模式: {currentSettings?.kanaType === 'hiragana' ? '平假名' : 
                    currentSettings?.kanaType === 'katakana' ? '片假名' : '全部'}</p>
+      <p>假名分类: {currentSettings?.kanaCategory === 'seion' ? '清音' :
+                   currentSettings?.kanaCategory === 'dakuon' ? '浊音' :
+                   currentSettings?.kanaCategory === 'youon' ? '拗音' : '全部'}</p>
       <p>播放方式: {currentSettings?.playOrder === 'sequential' ? '顺序' : '随机'}</p>
       <p>播放间隔: {currentSettings?.playInterval}秒</p>
     </div>

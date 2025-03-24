@@ -30,7 +30,7 @@
   // 开始测试
   function startTest() {
     // 获取当前设置下的假名列表
-    const list = getKanaList(currentSettings.kanaType);
+    const list = getKanaList(currentSettings.kanaType, currentSettings.kanaCategory);
     
     // 随机打乱列表
     kanaList = shuffleArray(list);
@@ -60,7 +60,7 @@
     currentKana = kanaList.shift();
     
     // 生成选项
-    const allKana = getKanaList(currentSettings.kanaType);
+    const allKana = getKanaList(currentSettings.kanaType, currentSettings.kanaCategory);
     options = generateTestOptions(currentKana, allKana);
     
     // 重置选择状态
@@ -121,7 +121,8 @@
       totalQuestions,
       accuracy,
       duration,
-      kanaType: currentSettings.kanaType
+      kanaType: currentSettings.kanaType,
+      kanaCategory: currentSettings.kanaCategory
     };
     
     // 保存测试结果
@@ -207,6 +208,15 @@
           <strong>
             {testResult.kanaType === 'hiragana' ? '平假名' : 
              testResult.kanaType === 'katakana' ? '片假名' : '全部'}
+          </strong>
+        </div>
+        
+        <div class="result-item">
+          <span>假名分类:</span>
+          <strong>
+            {testResult.kanaCategory === 'seion' ? '清音' :
+             testResult.kanaCategory === 'dakuon' ? '浊音' :
+             testResult.kanaCategory === 'youon' ? '拗音' : '全部'}
           </strong>
         </div>
       </div>

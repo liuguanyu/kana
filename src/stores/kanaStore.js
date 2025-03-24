@@ -225,6 +225,7 @@ const katakanaData = [
 // 默认设置
 const defaultSettings = {
   kanaType: 'hiragana', // 'hiragana', 'katakana', 'both'
+  kanaCategory: 'all', // 'seion'(清音), 'dakuon'(浊音), 'youon'(拗音), 'all'(全部)
   playOrder: 'sequential', // 'sequential', 'random'
   playInterval: 3, // 秒
   requiredCorrectCount: 3 // 连续正确次数，超过此次数从错题库删除
@@ -267,14 +268,35 @@ export const saveSettings = async (newSettings) => {
 };
 
 // 获取假名列表
-export const getKanaList = (kanaType) => {
+export const getKanaList = (kanaType, kanaCategory = 'all') => {
+  // 根据假名类型选择基础数据
+  let baseData;
   if (kanaType === 'hiragana') {
-    return hiraganaData;
+    baseData = hiraganaData;
   } else if (kanaType === 'katakana') {
-    return katakanaData;
+    baseData = katakanaData;
   } else {
-    return [...hiraganaData, ...katakanaData];
+    baseData = [...hiraganaData, ...katakanaData];
   }
+  
+  // 根据假名分类筛选数据
+  if (kanaCategory === 'all') {
+    return baseData;
+  } else if (kanaCategory === 'seion') {
+    // 清音：前46个（包括ん/ン）
+    return baseData.slice(0, 46);
+  } else if (kanaCategory === 'dakuon') {
+    // 浊音：从第46个开始，23个
+    const startIndex = kanaType === 'both' ? 46 * 2 : 46;
+    const endIndex = kanaType === 'both' ? 46 * 2 + 23 * 2 : 46 + 23;
+    return baseData.slice(startIndex, endIndex);
+  } else if (kanaCategory === 'youon') {
+    // 拗音：剩余的部分
+    const startIndex = kanaType === 'both' ? 46 * 2 + 23 * 2 : 46 + 23;
+    return baseData.slice(startIndex);
+  }
+  
+  return baseData;
 };
 
 // 打乱数组
