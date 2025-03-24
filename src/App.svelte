@@ -17,9 +17,9 @@
   onMount(async () => {
     try {
       const data = await chrome.storage.sync.get(['settings']);
-      if (data.settings) {
-        // 如果有设置，导航到Play页面
-        push('/play');
+      if (!data.settings) {
+        // 如果没有设置，导航到Settings页面
+        push('/settings');
       }
     } catch (error) {
       console.error('检查设置失败:', error);
@@ -29,6 +29,9 @@
   // 路由配置
   const routes = {
     '/': wrap({
+      component: Play
+    }),
+    '/settings': wrap({
       component: Settings
     }),
     '/play': wrap({
