@@ -152,27 +152,27 @@
       </div>
     </div>
     
-    <div class="controls">
-      <button on:click={playSound} class="sound-btn tooltip" aria-label="播放读音">
-        <span class="material-icons-round">volume_up</span>
-        <span class="tooltip-text">播放读音</span>
-      </button>
-      
-      <button on:click={togglePlay} class="play-btn tooltip" aria-label="播放/暂停">
-        {#if isPlaying}
-          <span class="material-icons-round">pause</span>
-          <span class="tooltip-text">暂停</span>
-        {:else}
-          <span class="material-icons-round">play_arrow</span>
-          <span class="tooltip-text">播放</span>
-        {/if}
-      </button>
-      
-      <button on:click={nextKana} class="next-btn tooltip" aria-label="下一个">
-        <span class="material-icons-round">skip_next</span>
-        <span class="tooltip-text">下一个</span>
-      </button>
-    </div>
+<div class="controls">
+  <button on:click={playSound} class="sound-btn tooltip" aria-label="播放读音" title="播放读音">
+    <i class="material-icons-round icon">volume_up</i>
+    <span class="tooltip-text">播放读音</span>
+  </button>
+  
+  <button on:click={togglePlay} class="play-btn tooltip" aria-label="播放/暂停" title={isPlaying ? "暂停" : "播放"}>
+    {#if isPlaying}
+      <i class="material-icons-round icon">pause</i>
+      <span class="tooltip-text">暂停</span>
+    {:else}
+      <i class="material-icons-round icon">play_arrow</i>
+      <span class="tooltip-text">播放</span>
+    {/if}
+  </button>
+  
+  <button on:click={nextKana} class="next-btn tooltip" aria-label="下一个" title="下一个">
+    <i class="material-icons-round icon">skip_next</i>
+    <span class="tooltip-text">下一个</span>
+  </button>
+</div>
     
     <div class="settings-info">
       <p>当前模式: {currentSettings?.kanaType === 'hiragana' ? '平假名' : 
@@ -282,6 +282,10 @@
   .tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+  }
+  
+  .icon {
+    font-size: 24px;
   }
   
   .sound-btn {
