@@ -153,23 +153,23 @@
     </div>
     
     <div class="controls">
-      <button on:click={playSound} class="sound-btn tooltip">
-        <span class="material-icons">volume_up</span>
+      <button on:click={playSound} class="sound-btn tooltip" aria-label="播放读音">
+        <span class="material-icons-round">volume_up</span>
         <span class="tooltip-text">播放读音</span>
       </button>
       
-      <button on:click={togglePlay} class="play-btn tooltip">
+      <button on:click={togglePlay} class="play-btn tooltip" aria-label="播放/暂停">
         {#if isPlaying}
-          <span class="material-icons">pause</span>
+          <span class="material-icons-round">pause</span>
           <span class="tooltip-text">暂停</span>
         {:else}
-          <span class="material-icons">play_arrow</span>
+          <span class="material-icons-round">play_arrow</span>
           <span class="tooltip-text">播放</span>
         {/if}
       </button>
       
-      <button on:click={nextKana} class="next-btn tooltip">
-        <span class="material-icons">skip_next</span>
+      <button on:click={nextKana} class="next-btn tooltip" aria-label="下一个">
+        <span class="material-icons-round">skip_next</span>
         <span class="tooltip-text">下一个</span>
       </button>
     </div>
