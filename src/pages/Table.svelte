@@ -33,8 +33,30 @@
     if (!row || row.length === 0) return;
     
     // 依次播放该行中所有有效的假名
-    for (const cell of row) {
+    for (let colIndex = 0; colIndex < row.length; colIndex++) {
+      const cell = row[colIndex];
       if (cell && cell.romaji) {
+        // 在播放前，找到对应的单元格元素
+        const cellSelector = `.kana-table tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 2})`;
+        const cellElement = document.querySelector(cellSelector);
+        
+        // 如果找到了元素，检查是否在视口内，如果不在则平滑滚动
+        if (cellElement) {
+          // 检查元素是否在视口内
+          const rect = cellElement.getBoundingClientRect();
+          const isInViewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+          
+          // 如果不在视口内，平滑滚动到该元素
+          if (!isInViewport) {
+            cellElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+        
         playKanaSound(cell.romaji);
         // 等待一段时间再播放下一个
         await new Promise(resolve => setTimeout(resolve, 800));
@@ -47,8 +69,30 @@
     if (kanaTable.length === 0) return;
     
     // 依次播放该列中所有有效的假名
-    for (const row of kanaTable) {
+    for (let rowIndex = 0; rowIndex < kanaTable.length; rowIndex++) {
+      const row = kanaTable[rowIndex];
       if (row[colIndex] && row[colIndex].romaji) {
+        // 在播放前，找到对应的单元格元素
+        const cellSelector = `.kana-table tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 2})`;
+        const cellElement = document.querySelector(cellSelector);
+        
+        // 如果找到了元素，检查是否在视口内，如果不在则平滑滚动
+        if (cellElement) {
+          // 检查元素是否在视口内
+          const rect = cellElement.getBoundingClientRect();
+          const isInViewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+          
+          // 如果不在视口内，平滑滚动到该元素
+          if (!isInViewport) {
+            cellElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+        
         playKanaSound(row[colIndex].romaji);
         // 等待一段时间再播放下一个
         await new Promise(resolve => setTimeout(resolve, 800));
