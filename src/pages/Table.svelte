@@ -6,16 +6,25 @@
   let kanaTable = [];
   let selectedType = 'hiragana'; // 默认平假名
   let selectedCategory = 'seion'; // 默认清音
+  let playingRomaji = null; // 当前正在播放的假名
   
   // 播放假名的读音
   function playKanaSound(romaji) {
     if (!romaji) return;
+    
+    // 设置当前正在播放的假名
+    playingRomaji = romaji;
     
     // 发送消息给background脚本播放音频
     chrome.runtime.sendMessage({
       action: 'playAudio',
       romaji: romaji
     });
+    
+    // 音频播放完毕后清除背景色（假设每个音频大约持续1秒）
+    setTimeout(() => {
+      playingRomaji = null;
+    }, 1000);
   }
   
   // 连续播放一行的所有假名
@@ -385,12 +394,12 @@
               {#each row as cell, colIndex}
                 {#if cell}
                   {#if cell.colspan}
-                    <td colspan={cell.colspan} class="kana-cell" on:click={() => playKanaSound(cell.romaji)}>
+                    <td colspan={cell.colspan} class="kana-cell" class:playing={playingRomaji === cell.romaji} on:click={() => playKanaSound(cell.romaji)}>
                       <div class="kana">{cell.kana}</div>
                       <div class="romaji">{cell.romaji}</div>
                     </td>
                   {:else}
-                    <td class="kana-cell" on:click={() => playKanaSound(cell.romaji)}>
+                    <td class="kana-cell" class:playing={playingRomaji === cell.romaji} on:click={() => playKanaSound(cell.romaji)}>
                       <div class="kana">{cell.kana}</div>
                       <div class="romaji">{cell.romaji}</div>
                     </td>
@@ -491,6 +500,11 @@
     vertical-align: middle;
     height: 60px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .kana-cell.playing {
+    background-color: #e3f2fd; /* 浅蓝色背景 */
   }
   
   .kana {
