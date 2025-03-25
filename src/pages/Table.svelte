@@ -422,14 +422,13 @@
   
   .controls-row {
     display: flex;
-    justify-content: flex-start;
-    gap: 16px;
+    justify-content: space-between;
     margin-bottom: 12px;
   }
   
   .select-wrapper {
     position: relative;
-    min-width: 120px;
+    width: 48%;
   }
   
   select {
