@@ -195,10 +195,21 @@
       });
       
       // だ行
-      const daRow = kanaList.filter(k => ['da', 'di', 'du', 'de', 'do'].includes(k.romaji));
-      daRow.forEach((kana, index) => {
-        if (index < 5) kanaTable[2][index] = kana;
-      });
+      const daRow = kanaList.filter(k => ['da', 'dji', 'dzu', 'de', 'do'].includes(k.romaji));
+      // 将da放在第一列，dji放在第二列，dzu放在第三列，de放在第四列，do放在第五列
+      if (daRow.length > 0) {
+        const daKana = daRow.find(k => k.romaji === 'da');
+        const djiKana = daRow.find(k => k.romaji === 'dji');
+        const dzuKana = daRow.find(k => k.romaji === 'dzu');
+        const deKana = daRow.find(k => k.romaji === 'de');
+        const doKana = daRow.find(k => k.romaji === 'do');
+        
+        if (daKana) kanaTable[2][0] = daKana;
+        if (djiKana) kanaTable[2][1] = djiKana;
+        if (dzuKana) kanaTable[2][2] = dzuKana;
+        if (deKana) kanaTable[2][3] = deKana;
+        if (doKana) kanaTable[2][4] = doKana;
+      }
       
       // ば行
       const baRow = kanaList.filter(k => ['ba', 'bi', 'bu', 'be', 'bo'].includes(k.romaji));
