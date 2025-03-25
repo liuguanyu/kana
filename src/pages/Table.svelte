@@ -7,6 +7,46 @@
   let selectedType = 'hiragana'; // 默认平假名
   let selectedCategory = 'seion'; // 默认清音
   
+  // 播放假名的读音
+  function playKanaSound(romaji) {
+    if (!romaji) return;
+    
+    // 发送消息给background脚本播放音频
+    chrome.runtime.sendMessage({
+      action: 'playAudio',
+      romaji: romaji
+    });
+  }
+  
+  // 连续播放一行的所有假名
+  async function playRowKana(rowIndex) {
+    const row = kanaTable[rowIndex];
+    if (!row || row.length === 0) return;
+    
+    // 依次播放该行中所有有效的假名
+    for (const cell of row) {
+      if (cell && cell.romaji) {
+        playKanaSound(cell.romaji);
+        // 等待一段时间再播放下一个
+        await new Promise(resolve => setTimeout(resolve, 800));
+      }
+    }
+  }
+  
+  // 连续播放一列的所有假名
+  async function playColumnKana(colIndex) {
+    if (kanaTable.length === 0) return;
+    
+    // 依次播放该列中所有有效的假名
+    for (const row of kanaTable) {
+      if (row[colIndex] && row[colIndex].romaji) {
+        playKanaSound(row[colIndex].romaji);
+        // 等待一段时间再播放下一个
+        await new Promise(resolve => setTimeout(resolve, 800));
+      }
+    }
+  }
+  
   // 五十音图行列标题
   const rows = ['あ行', 'か行', 'さ行', 'た行', 'な行', 'は行', 'ま行', 'や行', 'ら行', 'わ行'];
   const columns = ['あ段', 'い段', 'う段', 'え段', 'お段'];
@@ -288,22 +328,22 @@
           <tr>
             <th></th>
             {#if selectedCategory === 'youon'}
-              <th>や</th>
-              <th>ゆ</th>
-              <th>よ</th>
+              <th class="header-cell" on:click={() => playColumnKana(0)}>や</th>
+              <th class="header-cell" on:click={() => playColumnKana(1)}>ゆ</th>
+              <th class="header-cell" on:click={() => playColumnKana(2)}>よ</th>
             {:else}
-              <th>あ/a</th>
-              <th>い/i</th>
-              <th>う/u</th>
-              <th>え/e</th>
-              <th>お/o</th>
+              <th class="header-cell" on:click={() => playColumnKana(0)}>あ/a</th>
+              <th class="header-cell" on:click={() => playColumnKana(1)}>い/i</th>
+              <th class="header-cell" on:click={() => playColumnKana(2)}>う/u</th>
+              <th class="header-cell" on:click={() => playColumnKana(3)}>え/e</th>
+              <th class="header-cell" on:click={() => playColumnKana(4)}>お/o</th>
             {/if}
           </tr>
         </thead>
         <tbody>
           {#each kanaTable as row, rowIndex}
             <tr>
-              <th>
+              <th class="header-cell" on:click={() => playRowKana(rowIndex)}>
                 {#if selectedCategory === 'seion' || selectedCategory === 'all'}
                   {rows[rowIndex]}
                 {:else if selectedCategory === 'dakuon'}
@@ -328,12 +368,12 @@
               {#each row as cell, colIndex}
                 {#if cell}
                   {#if cell.colspan}
-                    <td colspan={cell.colspan} class="kana-cell">
+                    <td colspan={cell.colspan} class="kana-cell" on:click={() => playKanaSound(cell.romaji)}>
                       <div class="kana">{cell.kana}</div>
                       <div class="romaji">{cell.romaji}</div>
                     </td>
                   {:else}
-                    <td class="kana-cell">
+                    <td class="kana-cell" on:click={() => playKanaSound(cell.romaji)}>
                       <div class="kana">{cell.kana}</div>
                       <div class="romaji">{cell.romaji}</div>
                     </td>
@@ -423,9 +463,18 @@
     color: #222; /* 更深的颜色，提高可读性 */
   }
   
+  .header-cell {
+    cursor: pointer;
+  }
+  
+  .header-cell:hover {
+    background-color: #e0e0e0;
+  }
+  
   .kana-cell {
     vertical-align: middle;
     height: 60px;
+    cursor: pointer;
   }
   
   .kana {
