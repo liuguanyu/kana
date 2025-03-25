@@ -12,6 +12,7 @@
   import Test from './pages/Test.svelte';
   import Ranking from './pages/Rankings.svelte';
   import Review from './pages/Review.svelte';
+  import Table from './pages/Table.svelte';
   
   // 检查是否有设置
   onMount(async () => {
@@ -20,6 +21,9 @@
       if (!data.settings) {
         // 如果没有设置，导航到Settings页面
         push('/settings');
+      } else {
+        // 默认导航到总览页面
+        push('/table');
       }
     } catch (error) {
       console.error('检查设置失败:', error);
@@ -45,6 +49,9 @@
     }),
     '/review': wrap({
       component: Review
+    }),
+    '/table': wrap({
+      component: Table
     })
   };
 </script>

@@ -5,6 +5,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // 初始化设置
   const defaultSettings = {
     kanaType: 'hiragana', // 'hiragana', 'katakana', 'both'
+    kanaCategory: 'seion', // 'seion'(清音), 'dakuon'(浊音), 'youon'(拗音), 'all'(全部)
     playOrder: 'sequential', // 'sequential', 'random'
     playInterval: 3, // 播放间隔，单位秒
     requiredCorrectCount: 3 // 连续正确次数，用于从错题库中删除

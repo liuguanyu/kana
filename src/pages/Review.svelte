@@ -276,12 +276,12 @@
   
   .start-screen p {
     margin-bottom: 16px;
-    color: #666;
+    color: #333; /* 更深的文字颜色，提高可读性 */
   }
   
   .start-btn {
-    background-color: #4caf50;
-    color: white;
+    background-color: #e8f5e9; /* 更改为Play.svelte中的颜色 */
+    color: #2e7d32; /* 更改为Play.svelte中的颜色 */
     padding: 12px 24px;
     border: none;
     border-radius: 4px;
@@ -289,6 +289,7 @@
     cursor: pointer;
     margin-top: 16px;
     margin-bottom: 24px;
+    font-weight: 500; /* 加粗文字 */
   }
   
   .mistakes-list {
@@ -299,6 +300,7 @@
   .mistakes-list h3 {
     margin-bottom: 16px;
     text-align: center;
+    color: #333; /* 更深的文字颜色 */
   }
   
   .mistakes-grid {
@@ -318,17 +320,19 @@
   .mistake-kana {
     font-size: 24px;
     margin-bottom: 4px;
+    color: #333; /* 更深的文字颜色 */
   }
   
   .mistake-romaji {
     font-size: 12px;
-    color: #666;
+    color: #333; /* 更深的文字颜色，提高可读性 */
     margin-bottom: 8px;
   }
   
   .mistake-progress {
     font-size: 10px;
     color: #1976d2;
+    font-weight: 500; /* 加粗文字 */
   }
   
   .question-container {
@@ -345,8 +349,8 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background-color: #e3f2fd;
-    color: #1976d2;
+    background-color: #e0f2f1; /* 更改为Play.svelte中的颜色 */
+    color: #00796b; /* 更改为Play.svelte中的颜色 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -373,26 +377,31 @@
     height: 80px;
     border-radius: 8px;
     border: 1px solid #ddd;
-    background-color: white;
+    background-color: #f5f5f5; /* 更改为浅灰色背景，提高可见度 */
     font-size: 32px;
     cursor: pointer;
     transition: all 0.2s;
+    color: #333; /* 更深的文字颜色 */
+    font-weight: 500; /* 加粗文字 */
   }
   
   .option-btn:hover:not(:disabled) {
-    background-color: #f5f5f5;
+    background-color: #e3f2fd; /* 更改为Play.svelte中的颜色 */
+    border-color: #1976d2; /* 更改为Play.svelte中的颜色 */
   }
   
   .option-btn.correct {
     background-color: #e8f5e9;
     border-color: #4caf50;
     color: #2e7d32;
+    font-weight: 600; /* 更加粗 */
   }
   
   .option-btn.incorrect {
     background-color: #ffebee;
     border-color: #f44336;
     color: #c62828;
+    font-weight: 600; /* 更加粗 */
   }
   
   .feedback {
@@ -406,6 +415,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    font-weight: 500; /* 加粗文字 */
   }
   
   .incorrect-feedback {
@@ -414,12 +424,14 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    font-weight: 500; /* 加粗文字 */
   }
   
   .score {
     text-align: right;
     font-size: 14px;
-    color: #666;
+    color: #333; /* 更深的文字颜色，提高可读性 */
+    font-weight: 500; /* 加粗文字 */
   }
   
   .result-container {
@@ -430,42 +442,45 @@
   .result-card {
     background-color: white;
     border-radius: 8px;
+    padding: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 24px;
-    margin: 24px 0;
+    margin: 16px 0;
   }
   
   .result-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #f5f5f5;
+    margin-bottom: 8px;
+    color: #222; /* 更深的文字颜色，提高对比度 */
   }
   
-  .result-item:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+  .result-item span {
+    font-weight: 500; /* 稍微加粗标签文本 */
+  }
+  
+  .result-item strong {
+    font-weight: 600; /* 加粗数值文本 */
+    color: #1976d2; /* 蓝色，突出显示 */
   }
   
   .restart-btn {
-    background-color: #2196f3;
-    color: white;
+    background-color: #e3f2fd;
+    color: #1976d2;
     padding: 12px 24px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 16px;
+    font-weight: 500;
   }
   
   .success-message {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #4caf50;
-    margin-top: 16px;
+    margin-top: 24px;
+    color: #2e7d32;
   }
   
   .success-message .material-icons {
@@ -476,7 +491,8 @@
   .empty-state {
     text-align: center;
     padding: 32px 16px;
-    color: #666;
+    color: #222; /* 更深的颜色，提高可读性 */
+    font-weight: 500; /* 稍微加粗 */
   }
   
   .empty-state p {

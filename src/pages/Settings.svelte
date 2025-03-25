@@ -19,15 +19,11 @@
     };
   });
   
-  // 保存设置
-  async function handleSave() {
-    await saveSettings(currentSettings);
-    saveMessage = '设置已保存';
-    
-    // 3秒后清除消息
-    setTimeout(() => {
-      saveMessage = '';
-    }, 3000);
+  // 当设置变化时自动保存
+  $: {
+    if (currentSettings) {
+      saveSettings(currentSettings);
+    }
   }
 </script>
 
@@ -98,13 +94,6 @@
           </div>
         </div>
       </div>
-      
-      <div class="button-container">
-        <button class="save-button" on:click={handleSave}>保存设置</button>
-        {#if saveMessage}
-          <div class="success-message">{saveMessage}</div>
-        {/if}
-      </div>
     </div>
   {:else}
     <div class="loading">加载中...</div>
@@ -114,13 +103,12 @@
 <style>
   .settings-container {
     padding: 16px;
-    max-height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
+    min-height: auto;
+    padding-bottom: 30px;
   }
   
   h2 {
@@ -179,42 +167,6 @@
     outline: none;
     border-color: #4a90e2;
     box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-  }
-  
-  .button-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-  }
-  
-  .save-button {
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .save-button:hover {
-    background-color: #3a7bc8;
-  }
-  
-  .success-message {
-    padding: 6px 12px;
-    background-color: #e8f5e9;
-    border-radius: 4px;
-    color: #2e7d32;
-    font-size: 0.9rem;
-    animation: fadeIn 0.3s ease;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
   
   .loading {

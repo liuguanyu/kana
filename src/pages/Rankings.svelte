@@ -102,21 +102,24 @@
         class={sortBy === 'accuracy' ? 'active' : ''} 
         on:click={() => changeSortBy('accuracy')}
       >
-        正确率 {sortBy === 'accuracy' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        <span class="button-text">正确率</span>
+        <span class="sort-arrow">{sortBy === 'accuracy' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}</span>
       </button>
       
       <button 
         class={sortBy === 'duration' ? 'active' : ''} 
         on:click={() => changeSortBy('duration')}
       >
-        用时 {sortBy === 'duration' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        <span class="button-text">用时</span>
+        <span class="sort-arrow">{sortBy === 'duration' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}</span>
       </button>
       
       <button 
         class={sortBy === 'date' ? 'active' : ''} 
         on:click={() => changeSortBy('date')}
       >
-        日期 {sortBy === 'date' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        <span class="button-text">日期</span>
+        <span class="sort-arrow">{sortBy === 'date' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}</span>
       </button>
     </div>
     
@@ -170,32 +173,62 @@
   h2 {
     margin-bottom: 24px;
     text-align: center;
+    color: #111; /* 更深的颜色，提高可读性 */
   }
   
   .sort-controls {
     display: flex;
-    gap: 8px;
     margin-bottom: 16px;
     overflow-x: auto; /* 允许横向滚动而不换行 */
     padding-bottom: 4px; /* 为可能的滚动条留出空间 */
+    white-space: nowrap; /* 确保内容不换行 */
+    -webkit-overflow-scrolling: touch; /* 在iOS上提供平滑滚动 */
   }
   
   .sort-controls button {
+    flex: 0 0 auto; /* 不伸缩，保持自身大小 */
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 8px 12px;
+    padding: 8px 12px; /* 增加水平内边距 */
+    margin: 0 4px; /* 使用margin代替gap */
     font-size: 14px;
     cursor: pointer;
-    color: #333; /* 更深的文字颜色 */
-    font-weight: 500; /* 稍微加粗 */
+    color: #222; /* 更深的文字颜色，提高对比度 */
+    font-weight: 600; /* 加粗以提高可读性 */
+    position: relative; /* 为箭头定位做准备 */
+    min-width: 80px; /* 设置最小宽度 */
+    text-align: center; /* 文字居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 第一个按钮左边距为0 */
+  .sort-controls button:first-child {
+    margin-left: 0;
+  }
+  
+  /* 最后一个按钮右边距为0 */
+  .sort-controls button:last-child {
+    margin-right: 0;
+  }
+  
+  .button-text {
+    margin-right: 4px; /* 为箭头留出空间 */
+  }
+  
+  .sort-arrow {
+    display: inline-block;
+    width: 12px; /* 固定宽度，确保箭头不会影响按钮宽度 */
   }
   
   .sort-controls button.active {
     background-color: #e3f2fd;
     border-color: #2196f3;
     color: #0d47a1; /* 更深的蓝色，提高对比度 */
-    font-weight: 600; /* 更加粗 */
+    font-weight: 700; /* 更加粗 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 添加阴影增强视觉效果 */
   }
   
   .results-list {
@@ -222,7 +255,8 @@
   
   .date {
     font-size: 14px;
-    color: #333; /* 更深的颜色，提高可读性 */
+    color: #222; /* 更深的颜色，提高可读性 */
+    font-weight: 500; /* 稍微加粗 */
   }
   
   .delete-btn {
@@ -249,6 +283,15 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    color: #222; /* 更深的文字颜色，提高对比度 */
+  }
+  
+  .result-item span {
+    font-weight: 500; /* 稍微加粗标签文本 */
+  }
+  
+  .result-item strong {
+    font-weight: 600; /* 加粗数值文本 */
   }
   
   .result-item:last-child {
@@ -256,13 +299,15 @@
   }
   
   .accuracy {
-    color: #4caf50;
+    color: #2e7d32; /* 更深的绿色，提高对比度 */
+    font-weight: 700; /* 加粗 */
   }
   
   .empty-state {
     text-align: center;
     padding: 32px 16px;
-    color: #333; /* 更深的颜色，提高可读性 */
+    color: #222; /* 更深的颜色，提高可读性 */
+    font-weight: 500; /* 稍微加粗 */
   }
   
   .empty-state p {

@@ -17,7 +17,14 @@
   let testResult = null;
   
   // 订阅设置变化
-  onMount(() => {
+  onMount(async () => {
+    // 确保先加载最新的设置
+    await chrome.storage.sync.get(['settings']).then(data => {
+      if (data.settings) {
+        currentSettings = { ...data.settings };
+      }
+    });
+    
     const unsubscribe = settings.subscribe(value => {
       currentSettings = { ...value };
     });

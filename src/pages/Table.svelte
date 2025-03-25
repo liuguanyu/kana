@@ -262,53 +262,22 @@
 </script>
 
 <div class="table-container">
-  <h2>五十音图表</h2>
-  
   <div class="controls">
-    <div class="type-controls">
-      <button 
-        class={selectedType === 'hiragana' ? 'active' : ''} 
-        on:click={() => changeType('hiragana')}
-      >
-        平假名
-      </button>
+    <div class="controls-row">
+      <div class="select-wrapper">
+        <select bind:value={selectedType} on:change={() => generateKanaTable()}>
+          <option value="hiragana">平假名</option>
+          <option value="katakana">片假名</option>
+        </select>
+      </div>
       
-      <button 
-        class={selectedType === 'katakana' ? 'active' : ''} 
-        on:click={() => changeType('katakana')}
-      >
-        片假名
-      </button>
-    </div>
-    
-    <div class="category-controls">
-      <button 
-        class={selectedCategory === 'seion' ? 'active' : ''} 
-        on:click={() => changeCategory('seion')}
-      >
-        清音
-      </button>
-      
-      <button 
-        class={selectedCategory === 'dakuon' ? 'active' : ''} 
-        on:click={() => changeCategory('dakuon')}
-      >
-        浊音
-      </button>
-      
-      <button 
-        class={selectedCategory === 'youon' ? 'active' : ''} 
-        on:click={() => changeCategory('youon')}
-      >
-        拗音
-      </button>
-      
-      <button 
-        class={selectedCategory === 'all' ? 'active' : ''} 
-        on:click={() => changeCategory('all')}
-      >
-        全部
-      </button>
+      <div class="select-wrapper">
+        <select bind:value={selectedCategory} on:change={() => generateKanaTable()}>
+          <option value="seion">清音</option>
+          <option value="dakuon">浊音</option>
+          <option value="youon">拗音</option>
+        </select>
+      </div>
     </div>
   </div>
   
@@ -323,11 +292,11 @@
               <th>ゆ</th>
               <th>よ</th>
             {:else}
-              <th>あ段</th>
-              <th>い段</th>
-              <th>う段</th>
-              <th>え段</th>
-              <th>お段</th>
+              <th>あ/a</th>
+              <th>い/i</th>
+              <th>う/u</th>
+              <th>え/e</th>
+              <th>お/o</th>
             {/if}
           </tr>
         </thead>
@@ -390,57 +359,46 @@
     padding: 16px;
   }
   
-  h2 {
-    margin-bottom: 24px;
-    text-align: center;
-    color: #111; /* 更深的颜色，提高可读性 */
-    font-weight: 700;
-  }
-  
   .controls {
     margin-bottom: 24px;
   }
   
-  .type-controls, .category-controls {
+  .controls-row {
     display: flex;
+    justify-content: flex-start;
+    gap: 16px;
     margin-bottom: 12px;
-    overflow-x: auto; /* 允许横向滚动而不换行 */
-    padding-bottom: 4px; /* 为可能的滚动条留出空间 */
-    white-space: nowrap; /* 确保内容不换行 */
-    -webkit-overflow-scrolling: touch; /* 在iOS上提供平滑滚动 */
   }
   
-  .type-controls button, .category-controls button {
-    flex: 0 0 auto; /* 不伸缩，保持自身大小 */
-    background-color: #f5f5f5;
+  .select-wrapper {
+    position: relative;
+    min-width: 120px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 8px 12px;
-    margin: 0 4px;
+    background-color: #f5f5f5;
     font-size: 14px;
+    color: #222;
+    font-weight: 600;
     cursor: pointer;
-    color: #222; /* 更深的文字颜色，提高对比度 */
-    font-weight: 600; /* 加粗以提高可读性 */
-    min-width: 60px;
-    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23222'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
   }
   
-  /* 第一个按钮左边距为0 */
-  .type-controls button:first-child, .category-controls button:first-child {
-    margin-left: 0;
-  }
-  
-  /* 最后一个按钮右边距为0 */
-  .type-controls button:last-child, .category-controls button:last-child {
-    margin-right: 0;
-  }
-  
-  .type-controls button.active, .category-controls button.active {
-    background-color: #e3f2fd;
+  select:focus {
+    outline: none;
     border-color: #2196f3;
-    color: #0d47a1; /* 更深的蓝色，提高对比度 */
-    font-weight: 700; /* 更加粗 */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
   }
   
   .kana-table-wrapper {

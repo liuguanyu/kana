@@ -6,6 +6,7 @@
     { path: '/test', label: '测试', icon: '📝' },
     { path: '/ranking', label: '排名', icon: '🏆' },
     { path: '/review', label: '复习', icon: '🔄' },
+    { path: '/table', label: '总览', icon: '📊' },
     { path: '/settings', label: '设置', icon: '⚙️' }
   ];
 </script>
