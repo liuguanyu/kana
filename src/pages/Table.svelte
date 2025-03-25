@@ -48,7 +48,7 @@
   }
   
   // 五十音图行列标题
-  const rows = ['あ行', 'か行', 'さ行', 'た行', 'な行', 'は行', 'ま行', 'や行', 'ら行', 'わ行'];
+  const rows = ['あ行', 'か行', 'さ行', 'た行', 'な行', 'は行', 'ま行', 'や行', 'ら行', 'わ行', 'ん'];
   const columns = ['あ段', 'い段', 'う段', 'え段', 'お段'];
   
   // 订阅设置变化
@@ -151,18 +151,24 @@
       });
       
       // わ行
-      const waRow = seionList.filter(k => ['wa', 'wo', 'n'].includes(k.romaji));
+      const waRow = seionList.filter(k => ['wa', 'wo'].includes(k.romaji));
       if (waRow.length > 0) {
         kanaTable[9][0] = waRow.find(k => k.romaji === 'wa') || null;
         kanaTable[9][4] = waRow.find(k => k.romaji === 'wo') || null;
-        // ん放在わ行的最后
-        const n = waRow.find(k => k.romaji === 'n');
-        if (n) {
-          // 创建特殊的单元格，跨越多列
-          kanaTable[9][1] = { ...n, colspan: 3 };
-          kanaTable[9][2] = null;
-          kanaTable[9][3] = null;
+      }
+      
+      // ん单独一行
+      const n = seionList.find(k => k.romaji === 'n');
+      if (n) {
+        // 创建第11行专门放ん
+        if (!kanaTable[10]) {
+          kanaTable[10] = [];
+          for (let j = 0; j < 5; j++) {
+            kanaTable[10][j] = null;
+          }
         }
+        // 将ん放在第一列
+        kanaTable[10][0] = n;
       }
     }
     
@@ -189,7 +195,7 @@
       });
       
       // だ行
-      const daRow = kanaList.filter(k => ['da', 'dji', 'dzu', 'de', 'do'].includes(k.romaji));
+      const daRow = kanaList.filter(k => ['da', 'di', 'du', 'de', 'do'].includes(k.romaji));
       daRow.forEach((kana, index) => {
         if (index < 5) kanaTable[2][index] = kana;
       });
