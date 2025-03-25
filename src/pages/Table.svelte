@@ -396,7 +396,12 @@
       <table class="kana-table">
         <thead>
           <tr>
-            <th></th>
+            <th class="corner-cell" title="点击此处逐行阅读全部" on:click={() => {
+              // 逐行阅读所有行
+              for (let i = 0; i < kanaTable.length; i++) {
+                setTimeout(() => playRowKana(i), i * kanaTable[0].length * 800);
+              }
+            }}></th>
             {#if selectedCategory === 'youon'}
               <th class="header-cell" on:click={() => playColumnKana(0)}>や</th>
               <th class="header-cell" on:click={() => playColumnKana(1)}>ゆ</th>
@@ -538,6 +543,25 @@
   
   .header-cell:hover {
     background-color: #e0e0e0;
+  }
+  
+  .corner-cell {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .corner-cell:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .corner-cell::after {
+    content: "▶";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: #2196f3;
   }
   
   .kana-cell {
