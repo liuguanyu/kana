@@ -1,0 +1,183 @@
+/* pages/overview/overview.wxss */
+
+.container {
+  padding: 20rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+/* 顶部导航栏样式 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.settings-btn {
+  padding: 10rpx 20rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-icon {
+  font-size: 40rpx;
+}
+
+/* 标签切换样式 - 下拉选择器 */
+.tab-container, .category-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.tab-container {
+  margin-bottom: 20rpx;
+}
+
+.category-container {
+  margin-bottom: 30rpx;
+}
+
+.tab-container picker {
+  width: 45%;
+}
+
+.category-container picker {
+  width: 45%;
+}
+
+.tab, .category {
+  width: 100%;
+  text-align: center;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  color: #333;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab::after, .category::after {
+  content: "▼";
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24rpx;
+  color: #999;
+}
+
+.tab.active, .category.active {
+  font-weight: bold;
+}
+
+/* 表格样式 */
+.table-container {
+  background-color: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 30rpx;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f0f0f0;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 5rpx;
+  min-height: 100rpx;
+  border-right: 1rpx solid #ddd;
+  position: relative;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.header-cell {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #333;
+  min-height: 60rpx;
+  font-size: 28rpx;
+}
+
+.row-header {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #333;
+  width: 100rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.empty-cell {
+  background-color: #f9f9f9;
+}
+
+.kana {
+  font-size: 48rpx;
+  margin-bottom: 5rpx;
+  font-weight: bold;
+}
+
+.romaji {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 播放图标样式 */
+.play-all-icon, .play-row-icon {
+  font-size: 32rpx;
+  color: #4a6dff;
+}
+
+/* 播放状态提示 */
+.playing-status {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 15rpx 30rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
