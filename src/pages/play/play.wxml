@@ -1,0 +1,93 @@
+<!-- pages/play/play.wxml -->
+<view class="container">
+  <!-- 标题 -->
+  <view class="title">假名播放</view>
+  
+  <!-- 当前假名显示 -->
+  <view class="kana-display">
+    <view class="kana" wx:if="{{currentKana}}">{{currentKana.kana}}</view>
+    <view class="romaji" wx:if="{{currentKana}}">{{currentKana.romaji}}</view>
+    <view class="empty-message" wx:else>没有可播放的假名</view>
+  </view>
+  
+  <!-- 播放控制 -->
+  <view class="control-panel">
+    <!-- 播放/暂停按钮 -->
+    <view class="control-btn" bindtap="playPrev">
+      <text class="iconfont">◀◀</text>
+    </view>
+    
+    <block wx:if="{{!isPlaying}}">
+      <view class="control-btn play-btn" bindtap="startPlay">
+        <text class="iconfont">▶</text>
+      </view>
+    </block>
+    <block wx:else>
+      <block wx:if="{{isPaused}}">
+        <view class="control-btn play-btn" bindtap="resumePlay">
+          <text class="iconfont">▶</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="control-btn pause-btn" bindtap="pausePlay">
+          <text class="iconfont">❚❚</text>
+        </view>
+      </block>
+    </block>
+    
+    <view class="control-btn" bindtap="playNext">
+      <text class="iconfont">▶▶</text>
+    </view>
+  </view>
+  
+  <!-- 停止按钮 -->
+  <view class="stop-btn" bindtap="stopPlay" wx:if="{{isPlaying}}">
+    <text class="iconfont">■</text>
+  </view>
+  
+  <!-- 进度条 -->
+  <view class="progress-container">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    <view class="progress-text">{{playIndex + 1}}/{{playList.length}}</view>
+  </view>
+  
+  <!-- 设置信息 -->
+  <view class="settings-info">
+    <view class="setting-item">
+      <text class="setting-label">假名类型：</text>
+      <text class="setting-value">
+        {{settings.kanaType === 'hiragana' ? '平假名' : 
+          settings.kanaType === 'katakana' ? '片假名' : '全部'}}
+      </text>
+    </view>
+    
+    <view class="setting-item">
+      <text class="setting-label">假名分类：</text>
+      <text class="setting-value">
+        {{settings.kanaCategory === 'seion' ? '清音' : 
+          settings.kanaCategory === 'dakuon' ? '浊音' : 
+          settings.kanaCategory === 'youon' ? '拗音' : '全部'}}
+      </text>
+    </view>
+    
+    <view class="setting-item">
+      <text class="setting-label">播放模式：</text>
+      <text class="setting-value">
+        {{settings.playMode === 'sequential' ? '顺序播放' : '随机播放'}}
+      </text>
+    </view>
+    
+    <view class="setting-item">
+      <text class="setting-label">播放间隔：</text>
+      <text class="setting-value">{{settings.playInterval || 2}}秒</text>
+    </view>
+  </view>
+  
+  <!-- 底部按钮 -->
+  <view class="bottom-buttons">
+    <button class="btn" bindtap="regeneratePlayList">重新生成列表</button>
+    <button class="btn" bindtap="goToSettings">设置</button>
+  </view>
+</view>

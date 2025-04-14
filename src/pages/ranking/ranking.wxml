@@ -1,0 +1,101 @@
+<!-- pages/ranking/ranking.wxml -->
+<view class="container">
+  <view class="header">
+    <text class="title">测试记录</text>
+  </view>
+  
+  <!-- 排序选项 -->
+  <view class="sort-options">
+    <view 
+      class="sort-item {{sortBy === 'date' ? 'active' : ''}}" 
+      bindtap="changeSortBy" 
+      data-sort="date"
+    >
+      日期
+      <text class="sort-icon" wx:if="{{sortBy === 'date'}}">
+        {{sortOrder === 'asc' ? '↑' : '↓'}}
+      </text>
+    </view>
+    
+    <view 
+      class="sort-item {{sortBy === 'accuracy' ? 'active' : ''}}" 
+      bindtap="changeSortBy" 
+      data-sort="accuracy"
+    >
+      正确率
+      <text class="sort-icon" wx:if="{{sortBy === 'accuracy'}}">
+        {{sortOrder === 'asc' ? '↑' : '↓'}}
+      </text>
+    </view>
+    
+    <view 
+      class="sort-item {{sortBy === 'duration' ? 'active' : ''}}" 
+      bindtap="changeSortBy" 
+      data-sort="duration"
+    >
+      用时
+      <text class="sort-icon" wx:if="{{sortBy === 'duration'}}">
+        {{sortOrder === 'asc' ? '↑' : '↓'}}
+      </text>
+    </view>
+  </view>
+  
+  <!-- 记录列表 -->
+  <block wx:if="{{!noRecords}}">
+    <scroll-view class="records-list" scroll-y="true">
+      <view class="record-item" wx:for="{{testRecords}}" wx:key="index">
+        <view class="record-header">
+          <text class="record-date">{{formatDate(item.date)}}</text>
+          <view class="record-delete" bindtap="deleteRecord" data-index="{{index}}">
+            <text class="delete-icon">×</text>
+          </view>
+        </view>
+        
+        <view class="record-content">
+          <view class="record-stat">
+            <text class="stat-label">得分</text>
+            <text class="stat-value">{{item.score}}</text>
+          </view>
+          
+          <view class="record-stat">
+            <text class="stat-label">正确率</text>
+            <text class="stat-value">{{item.accuracy.toFixed(1)}}%</text>
+          </view>
+          
+          <view class="record-stat">
+            <text class="stat-label">用时</text>
+            <text class="stat-value">{{item.duration}}秒</text>
+          </view>
+          
+          <view class="record-stat">
+            <text class="stat-label">题数</text>
+            <text class="stat-value">{{item.totalQuestions}}</text>
+          </view>
+          
+          <view class="record-stat">
+            <text class="stat-label">正确</text>
+            <text class="stat-value">{{item.correctCount}}</text>
+          </view>
+          
+          <view class="record-stat">
+            <text class="stat-label">错误</text>
+            <text class="stat-value">{{item.wrongCount}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    
+    <!-- 清空记录按钮 -->
+    <view class="clear-button" bindtap="clearAllRecords">
+      <text>清空所有记录</text>
+    </view>
+  </block>
+  
+  <!-- 无记录提示 -->
+  <block wx:else>
+    <view class="no-records">
+      <text class="no-records-text">暂无测试记录</text>
+      <button class="start-test-btn" bindtap="goToTest">开始测试</button>
+    </view>
+  </block>
+</view>

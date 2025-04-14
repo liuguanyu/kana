@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/overview/overview",
+    "pages/play/play",
+    "pages/test/test",
+    "pages/ranking/ranking",
+    "pages/review/review",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "50音图学习工具",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999",
+    "selectedColor": "#1aad19",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/overview/overview",
+        "text": "总览"
+      },
+      {
+        "pagePath": "pages/play/play",
+        "text": "播放"
+      },
+      {
+        "pagePath": "pages/test/test",
+        "text": "测试"
+      },
+      {
+        "pagePath": "pages/ranking/ranking",
+        "text": "排名"
+      },
+      {
+        "pagePath": "pages/review/review",
+        "text": "复习"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

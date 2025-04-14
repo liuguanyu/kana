@@ -1,0 +1,188 @@
+/* pages/play/play.wxss */
+
+.container {
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 标题样式 */
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40rpx;
+  text-align: center;
+}
+
+/* 假名显示区域 */
+.kana-display {
+  width: 300rpx;
+  height: 300rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+.kana {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+
+.romaji {
+  font-size: 40rpx;
+  color: #666;
+}
+
+.empty-message {
+  font-size: 32rpx;
+  color: #999;
+  text-align: center;
+}
+
+/* 控制面板 */
+.control-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.control-btn {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.play-btn, .pause-btn {
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #4a6dff;
+}
+
+.play-btn .iconfont, .pause-btn .iconfont {
+  color: #fff;
+  font-size: 50rpx;
+}
+
+.control-btn .iconfont {
+  font-size: 40rpx;
+  color: #333;
+}
+
+/* 停止按钮 */
+.stop-btn {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.stop-btn .iconfont {
+  color: #fff;
+  font-size: 40rpx;
+}
+
+/* 进度条 */
+.progress-container {
+  width: 100%;
+  margin-bottom: 40rpx;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10rpx;
+  background-color: #e0e0e0;
+  border-radius: 5rpx;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4a6dff;
+  border-radius: 5rpx;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+
+/* 设置信息 */
+.settings-info {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.setting-value {
+  color: #333;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 底部按钮 */
+.bottom-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  flex: 1;
+  margin: 0 10rpx;
+  background-color: #4a6dff;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+
+.btn:first-child {
+  margin-left: 0;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}

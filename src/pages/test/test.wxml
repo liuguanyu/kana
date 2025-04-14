@@ -1,0 +1,97 @@
+<!-- pages/test/test.wxml -->
+<view class="container">
+  <!-- 测试进行中 -->
+  <block wx:if="{{!showResult}}">
+    <view class="progress-info">
+      <text class="progress-text">{{currentQuestionIndex + 1}} / {{totalQuestions}}</text>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{(currentQuestionIndex + 1) / totalQuestions * 100}}%"></view>
+      </view>
+    </view>
+    
+    <view class="score-display">
+      <text class="score-text">得分: {{score}}</text>
+    </view>
+    
+    <view class="question-container">
+      <view class="audio-button" bindtap="replayAudio">
+        <text class="iconfont icon-sound"></text>
+        <text class="audio-text">点击播放发音</text>
+      </view>
+      
+      <view class="options-container">
+        <block wx:for="{{options}}" wx:key="index">
+          <view 
+            class="option-item {{selectedOption === item ? (isCorrect ? 'correct' : 'wrong') : ''}}" 
+            bindtap="selectOption" 
+            data-index="{{index}}"
+            hover-class="option-hover"
+          >
+            <text class="option-kana">{{item.kana}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+  
+  <!-- 测试结果 -->
+  <block wx:else>
+    <view class="result-container">
+      <view class="result-header">
+        <text class="result-title">测试结果</text>
+      </view>
+      
+      <view class="result-content">
+        <view class="result-item">
+          <text class="result-label">得分:</text>
+          <text class="result-value">{{score}}</text>
+        </view>
+        
+        <view class="result-item">
+          <text class="result-label">正确率:</text>
+          <text class="result-value">{{accuracy}}%</text>
+        </view>
+        
+        <view class="result-item">
+          <text class="result-label">用时:</text>
+          <text class="result-value">{{testDuration}}秒</text>
+        </view>
+        
+        <view class="result-item">
+          <text class="result-label">正确数:</text>
+          <text class="result-value">{{correctCount}}</text>
+        </view>
+        
+        <view class="result-item">
+          <text class="result-label">错误数:</text>
+          <text class="result-value">{{wrongCount}}</text>
+        </view>
+      </view>
+      
+      <view class="result-message">
+        <block wx:if="{{accuracy >= 90}}">
+          <text class="result-message-text excellent">太棒了！继续保持！</text>
+        </block>
+        <block wx:elif="{{accuracy >= 70}}">
+          <text class="result-message-text good">做得不错！再接再厉！</text>
+        </block>
+        <block wx:elif="{{accuracy >= 50}}">
+          <text class="result-message-text average">还可以，继续努力！</text>
+        </block>
+        <block wx:else>
+          <text class="result-message-text poor">需要更多练习，加油！</text>
+        </block>
+      </view>
+      
+      <view class="wrong-answers-info" wx:if="{{wrongCount > 0}}">
+        <text class="wrong-answers-text">已将错题添加到错题库，可以在"复习"页面进行针对性练习。</text>
+      </view>
+      
+      <view class="result-buttons">
+        <button class="btn restart-btn" bindtap="restartTest">重新测试</button>
+        <button class="btn review-btn" bindtap="goToReview" wx:if="{{wrongCount > 0}}">错题复习</button>
+        <button class="btn settings-btn" bindtap="goToSettings">设置</button>
+      </view>
+    </view>
+  </block>
+</view>

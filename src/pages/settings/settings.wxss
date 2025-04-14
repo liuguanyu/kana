@@ -1,0 +1,113 @@
+/* pages/settings/settings.wxss */
+
+.container {
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 设置区域 */
+.settings-section {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+/* 设置项 */
+.setting-item {
+  margin-bottom: 30rpx;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.setting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.setting-value {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 单选按钮组 */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.radio:last-child {
+  margin-bottom: 0;
+}
+
+/* 滑块 */
+slider {
+  margin: 0;
+}
+
+/* 按钮 */
+.reset-btn {
+  background-color: #ff9500;
+  color: #fff;
+}
+
+.clear-btn {
+  background-color: #ff3b30;
+  color: #fff;
+}
+
+.home-btn {
+  background-color: #4a6dff;
+  color: #fff;
+  margin-top: 20rpx;
+}
+
+/* 页脚 */
+.footer {
+  margin-top: auto;
+  padding-top: 30rpx;
+}

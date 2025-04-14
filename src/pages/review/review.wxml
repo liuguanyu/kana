@@ -1,0 +1,99 @@
+<!-- pages/review/review.wxml -->
+<view class="container">
+  <view class="header">
+    <text class="title">错题复习</text>
+  </view>
+  
+  <!-- 无错题提示 -->
+  <block wx:if="{{noWrongItems}}">
+    <view class="no-items">
+      <text class="no-items-text">暂无错题</text>
+      <text class="no-items-desc">去测试页面挑战一下吧！</text>
+      <button class="start-test-btn" bindtap="goToTest">开始测试</button>
+    </view>
+  </block>
+  
+  <!-- 复习中 -->
+  <block wx:elif="{{isReviewing && !isFinished}}">
+    <view class="progress">
+      <text class="progress-text">{{currentIndex + 1}} / {{totalQuestions}}</text>
+      <progress class="progress-bar" percent="{{(currentIndex + 1) / totalQuestions * 100}}" stroke-width="3" activeColor="#4a6dff" backgroundColor="#e0e0e0"></progress>
+    </view>
+    
+    <view class="question-container">
+      <!-- 音频播放按钮 -->
+      <view class="audio-button" bindtap="replayAudio">
+        <text class="audio-icon">🔊</text>
+        <text class="audio-text">点击重播</text>
+      </view>
+      
+      <!-- 选项列表 -->
+      <view class="options-container">
+        <view 
+          wx:for="{{options}}" 
+          wx:key="index" 
+          class="option-item {{isAnswered && item === selectedOption ? (isCorrect ? 'correct' : 'wrong') : ''}} {{isAnswered && item === correctAnswer && !isCorrect ? 'correct-answer' : ''}}"
+          bindtap="selectOption"
+          data-option="{{item}}"
+        >
+          <text class="option-text">{{item}}</text>
+        </view>
+      </view>
+      
+      <!-- 结果提示 -->
+      <view class="result-tip {{showResult ? (isCorrect ? 'correct' : 'wrong') : 'hidden'}}">
+        <text>{{isCorrect ? '正确！' : '错误！'}}</text>
+      </view>
+      
+      <!-- 连续答对提示 -->
+      <block wx:if="{{showResult && isCorrect}}">
+        <view class="consecutive-tip">
+          <text>连续答对: {{consecutiveCorrect[correctAnswer]}} / {{requiredConsecutiveCorrect}}</text>
+          <text wx:if="{{consecutiveCorrect[correctAnswer] >= requiredConsecutiveCorrect}}" class="removed-tip">已从错题库移除！</text>
+        </view>
+      </block>
+    </view>
+  </block>
+  
+  <!-- 复习结束 -->
+  <block wx:elif="{{isFinished}}">
+    <view class="result-container">
+      <view class="result-header">
+        <text class="result-title">复习完成</text>
+      </view>
+      
+      <view class="result-stats">
+        <view class="result-stat">
+          <text class="stat-label">总题数</text>
+          <text class="stat-value">{{totalQuestions}}</text>
+        </view>
+        
+        <view class="result-stat">
+          <text class="stat-label">正确</text>
+          <text class="stat-value">{{correctCount}}</text>
+        </view>
+        
+        <view class="result-stat">
+          <text class="stat-label">错误</text>
+          <text class="stat-value">{{wrongCount}}</text>
+        </view>
+        
+        <view class="result-stat">
+          <text class="stat-label">正确率</text>
+          <text class="stat-value">{{accuracy.toFixed(1)}}%</text>
+        </view>
+      </view>
+      
+      <view class="result-message">
+        <text wx:if="{{noWrongItems}}" class="congrats-message">恭喜！你已经清空了所有错题！</text>
+        <text wx:else class="continue-message">继续加油！还有{{wrongItems.length}}个错题需要复习。</text>
+      </view>
+      
+      <view class="result-buttons">
+        <button class="restart-btn" bindtap="restartReview" wx:if="{{!noWrongItems}}">继续复习</button>
+        <button class="test-btn" bindtap="goToTest">开始测试</button>
+        <button class="settings-btn" bindtap="goToSettings">调整设置</button>
+      </view>
+    </view>
+  </block>
+</view>

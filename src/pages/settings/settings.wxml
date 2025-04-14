@@ -1,0 +1,102 @@
+<!-- pages/settings/settings.wxml -->
+<view class="container">
+  <view class="header">
+    <text class="title">设置</text>
+  </view>
+  
+  <view class="settings-section">
+    <view class="section-title">学习设置</view>
+    
+    <!-- 假名类型 -->
+    <view class="setting-item">
+      <text class="setting-label">假名类型</text>
+      <radio-group class="radio-group" bindchange="onKanaTypeChange">
+        <label class="radio" wx:for="{{kanaTypeOptions}}" wx:key="value">
+          <radio value="{{item.value}}" checked="{{settings.kanaType === item.value}}" color="#4a6dff" />
+          <text>{{item.label}}</text>
+        </label>
+      </radio-group>
+    </view>
+    
+    <!-- 假名分类 -->
+    <view class="setting-item">
+      <text class="setting-label">假名分类</text>
+      <radio-group class="radio-group" bindchange="onKanaCategoryChange">
+        <label class="radio" wx:for="{{kanaCategoryOptions}}" wx:key="value">
+          <radio value="{{item.value}}" checked="{{settings.kanaCategory === item.value}}" color="#4a6dff" />
+          <text>{{item.label}}</text>
+        </label>
+      </radio-group>
+    </view>
+    
+    <!-- 播放模式 -->
+    <view class="setting-item">
+      <text class="setting-label">播放模式</text>
+      <radio-group class="radio-group" bindchange="onPlayModeChange">
+        <label class="radio" wx:for="{{playModeOptions}}" wx:key="value">
+          <radio value="{{item.value}}" checked="{{settings.playMode === item.value}}" color="#4a6dff" />
+          <text>{{item.label}}</text>
+        </label>
+      </radio-group>
+    </view>
+    
+    <!-- 播放间隔 -->
+    <view class="setting-item">
+      <view class="setting-header">
+        <text class="setting-label">播放间隔</text>
+        <text class="setting-value">{{settings.playInterval}}秒</text>
+      </view>
+      <slider 
+        min="{{playIntervalMin}}" 
+        max="{{playIntervalMax}}" 
+        value="{{settings.playInterval}}" 
+        step="1" 
+        block-size="24" 
+        activeColor="#4a6dff" 
+        block-color="#4a6dff" 
+        bindchange="onPlayIntervalChange"
+      />
+    </view>
+    
+    <!-- 错题重现次数 -->
+    <view class="setting-item">
+      <view class="setting-header">
+        <text class="setting-label">错题重现次数</text>
+        <text class="setting-value">连续答对{{settings.requiredConsecutiveCorrect}}次后移除</text>
+      </view>
+      <slider 
+        min="{{requiredConsecutiveCorrectMin}}" 
+        max="{{requiredConsecutiveCorrectMax}}" 
+        value="{{settings.requiredConsecutiveCorrect}}" 
+        step="1" 
+        block-size="24" 
+        activeColor="#4a6dff" 
+        block-color="#4a6dff" 
+        bindchange="onRequiredConsecutiveCorrectChange"
+      />
+    </view>
+  </view>
+  
+  <view class="settings-section">
+    <view class="section-title">数据管理</view>
+    
+    <!-- 重置设置 -->
+    <view class="setting-item">
+      <button class="reset-btn" bindtap="resetSettings">重置为默认设置</button>
+    </view>
+    
+    <!-- 清空错题库 -->
+    <view class="setting-item">
+      <button class="clear-btn" bindtap="clearWrongItems">清空错题库</button>
+    </view>
+    
+    <!-- 清空测试记录 -->
+    <view class="setting-item">
+      <button class="clear-btn" bindtap="clearTestRecords">清空测试记录</button>
+    </view>
+  </view>
+  
+  <view class="footer">
+    <button class="home-btn" bindtap="goToHome">返回首页</button>
+  </view>
+</view>

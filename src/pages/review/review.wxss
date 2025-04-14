@@ -1,0 +1,268 @@
+/* pages/review/review.wxss */
+
+.container {
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 无错题提示 */
+.no-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.no-items-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.no-items-desc {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.start-test-btn {
+  background-color: #4a6dff;
+  color: #fff;
+  font-size: 28rpx;
+  padding: 20rpx 60rpx;
+  border-radius: 10rpx;
+}
+
+/* 进度条 */
+.progress {
+  margin-bottom: 30rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+  display: block;
+  text-align: right;
+}
+
+.progress-bar {
+  width: 100%;
+}
+
+/* 问题容器 */
+.question-container {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 音频按钮 */
+.audio-button {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background-color: #4a6dff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 10rpx rgba(74, 109, 255, 0.3);
+}
+
+.audio-icon {
+  font-size: 60rpx;
+  color: #fff;
+  margin-bottom: 5rpx;
+}
+
+.audio-text {
+  font-size: 20rpx;
+  color: #fff;
+}
+
+/* 选项列表 */
+.options-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.option-item {
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120rpx;
+}
+
+.option-text {
+  font-size: 40rpx;
+  color: #333;
+}
+
+/* 选项状态 */
+.option-item.correct {
+  background-color: #4cd964;
+}
+
+.option-item.wrong {
+  background-color: #ff3b30;
+}
+
+.option-item.correct-answer {
+  background-color: #4cd964;
+  opacity: 0.7;
+}
+
+/* 结果提示 */
+.result-tip {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 10rpx 30rpx;
+  border-radius: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.result-tip.correct {
+  background-color: #4cd964;
+  color: #fff;
+}
+
+.result-tip.wrong {
+  background-color: #ff3b30;
+  color: #fff;
+}
+
+.result-tip.hidden {
+  visibility: hidden;
+}
+
+/* 连续答对提示 */
+.consecutive-tip {
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+}
+
+.removed-tip {
+  display: block;
+  color: #4cd964;
+  font-weight: bold;
+  margin-top: 5rpx;
+}
+
+/* 结果容器 */
+.result-container {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.result-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 结果统计 */
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.result-stat {
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 结果消息 */
+.result-message {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.congrats-message {
+  font-size: 28rpx;
+  color: #4cd964;
+  font-weight: bold;
+}
+
+.continue-message {
+  font-size: 28rpx;
+  color: #4a6dff;
+}
+
+/* 结果按钮 */
+.result-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.restart-btn {
+  background-color: #4a6dff;
+  color: #fff;
+}
+
+.test-btn {
+  background-color: #5ac8fa;
+  color: #fff;
+}
+
+.settings-btn {
+  background-color: #ff9500;
+  color: #fff;
+}

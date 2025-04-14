@@ -1,0 +1,164 @@
+<!-- pages/overview/overview.wxml -->
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="title">50音图总览</view>
+    <view class="settings-btn" bindtap="navigateToSettings">
+      <text class="settings-icon">⚙️</text>
+    </view>
+  </view>
+
+  <!-- 标签切换和分类切换 -->
+  <view class="tab-container">
+    <picker bindchange="switchTab" value="{{activeTab === 'hiragana' ? 0 : 1}}" range="{{['平假名', '片假名']}}">
+      <view class="tab {{activeTab === 'hiragana' ? 'active' : ''}}">
+        {{activeTab === 'hiragana' ? '平假名' : '片假名'}}
+      </view>
+    </picker>
+    
+    <picker bindchange="switchCategory" value="{{activeCategory === 'seion' ? 0 : (activeCategory === 'dakuon' ? 1 : 2)}}" range="{{['清音', '浊音', '拗音']}}">
+      <view class="category {{activeCategory === 'seion' ? 'active' : ''}}">
+        {{activeCategory === 'seion' ? '清音' : (activeCategory === 'dakuon' ? '浊音' : '拗音')}}
+      </view>
+    </picker>
+  </view>
+  
+  <!-- 假名表格 -->
+  <view class="table-container">
+    <!-- 表格头部 - 列标题 -->
+    <view class="table-header">
+      <view class="table-cell header-cell" bindtap="playAll">
+        <text class="play-all-icon">▶</text>
+      </view>
+      
+      <!-- 清音和浊音的列标题 -->
+      <block wx:if="{{activeCategory === 'seion' || activeCategory === 'dakuon'}}">
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="0">a</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="1">i</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="2">u</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="3">e</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="4">o</view>
+      </block>
+      
+      <!-- 拗音的列标题 -->
+      <block wx:if="{{activeCategory === 'youon'}}">
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="0">ya</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="1">yu</view>
+        <view class="table-cell header-cell" bindtap="playColumn" data-col="2">yo</view>
+      </block>
+    </view>
+    
+    <!-- 表格内容 - 平假名 -->
+    <block wx:if="{{activeTab === 'hiragana'}}">
+      <block wx:for="{{hiraganaTable}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex">
+        <view class="table-row">
+          <!-- 行标题 -->
+          <view class="table-cell row-header" bindtap="playRow" data-row="{{rowIndex}}">
+            <block wx:if="{{activeCategory === 'seion'}}">
+              <block wx:if="{{rowIndex === 0}}">あ行</block>
+              <block wx:elif="{{rowIndex === 1}}">か行</block>
+              <block wx:elif="{{rowIndex === 2}}">さ行</block>
+              <block wx:elif="{{rowIndex === 3}}">た行</block>
+              <block wx:elif="{{rowIndex === 4}}">な行</block>
+              <block wx:elif="{{rowIndex === 5}}">は行</block>
+              <block wx:elif="{{rowIndex === 6}}">ま行</block>
+              <block wx:elif="{{rowIndex === 7}}">や行</block>
+              <block wx:elif="{{rowIndex === 8}}">ら行</block>
+              <block wx:elif="{{rowIndex === 9}}">わ行</block>
+              <block wx:elif="{{rowIndex === 10}}">ん</block>
+            </block>
+            <block wx:elif="{{activeCategory === 'dakuon'}}">
+              <block wx:if="{{rowIndex === 0}}">が行</block>
+              <block wx:elif="{{rowIndex === 1}}">ざ行</block>
+              <block wx:elif="{{rowIndex === 2}}">だ行</block>
+              <block wx:elif="{{rowIndex === 3}}">ば行</block>
+              <block wx:elif="{{rowIndex === 4}}">ぱ行</block>
+            </block>
+            <block wx:elif="{{activeCategory === 'youon'}}">
+              <block wx:if="{{rowIndex === 0}}">きゃ行</block>
+              <block wx:elif="{{rowIndex === 1}}">しゃ行</block>
+              <block wx:elif="{{rowIndex === 2}}">ちゃ行</block>
+              <block wx:elif="{{rowIndex === 3}}">にゃ行</block>
+              <block wx:elif="{{rowIndex === 4}}">ひゃ行</block>
+              <block wx:elif="{{rowIndex === 5}}">みゃ行</block>
+              <block wx:elif="{{rowIndex === 6}}">りゃ行</block>
+              <block wx:elif="{{rowIndex === 7}}">ぎゃ行</block>
+              <block wx:elif="{{rowIndex === 8}}">じゃ行</block>
+              <block wx:elif="{{rowIndex === 9}}">びゃ行</block>
+              <block wx:elif="{{rowIndex === 10}}">ぴゃ行</block>
+            </block>
+          </view>
+          
+          <!-- 行内容 -->
+          <block wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
+            <view class="table-cell {{cell ? '' : 'empty-cell'}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
+              <block wx:if="{{cell}}">
+                <view class="kana">{{cell.kana}}</view>
+                <view class="romaji">{{cell.romaji}}</view>
+              </block>
+            </view>
+          </block>
+        </view>
+      </block>
+    </block>
+    
+    <!-- 表格内容 - 片假名 -->
+    <block wx:if="{{activeTab === 'katakana'}}">
+      <block wx:for="{{katakanaTable}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex">
+        <view class="table-row">
+          <!-- 行标题 -->
+          <view class="table-cell row-header" bindtap="playRow" data-row="{{rowIndex}}">
+            <block wx:if="{{activeCategory === 'seion'}}">
+              <block wx:if="{{rowIndex === 0}}">あ行</block>
+              <block wx:elif="{{rowIndex === 1}}">か行</block>
+              <block wx:elif="{{rowIndex === 2}}">さ行</block>
+              <block wx:elif="{{rowIndex === 3}}">た行</block>
+              <block wx:elif="{{rowIndex === 4}}">な行</block>
+              <block wx:elif="{{rowIndex === 5}}">は行</block>
+              <block wx:elif="{{rowIndex === 6}}">ま行</block>
+              <block wx:elif="{{rowIndex === 7}}">や行</block>
+              <block wx:elif="{{rowIndex === 8}}">ら行</block>
+              <block wx:elif="{{rowIndex === 9}}">わ行</block>
+              <block wx:elif="{{rowIndex === 10}}">ん</block>
+            </block>
+            <block wx:elif="{{activeCategory === 'dakuon'}}">
+              <block wx:if="{{rowIndex === 0}}">が行</block>
+              <block wx:elif="{{rowIndex === 1}}">ざ行</block>
+              <block wx:elif="{{rowIndex === 2}}">だ行</block>
+              <block wx:elif="{{rowIndex === 3}}">ば行</block>
+              <block wx:elif="{{rowIndex === 4}}">ぱ行</block>
+            </block>
+            <block wx:elif="{{activeCategory === 'youon'}}">
+              <block wx:if="{{rowIndex === 0}}">きゃ行</block>
+              <block wx:elif="{{rowIndex === 1}}">しゃ行</block>
+              <block wx:elif="{{rowIndex === 2}}">ちゃ行</block>
+              <block wx:elif="{{rowIndex === 3}}">にゃ行</block>
+              <block wx:elif="{{rowIndex === 4}}">ひゃ行</block>
+              <block wx:elif="{{rowIndex === 5}}">みゃ行</block>
+              <block wx:elif="{{rowIndex === 6}}">りゃ行</block>
+              <block wx:elif="{{rowIndex === 7}}">ぎゃ行</block>
+              <block wx:elif="{{rowIndex === 8}}">じゃ行</block>
+              <block wx:elif="{{rowIndex === 9}}">びゃ行</block>
+              <block wx:elif="{{rowIndex === 10}}">ぴゃ行</block>
+            </block>
+          </view>
+          
+          <!-- 行内容 -->
+          <block wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
+            <view class="table-cell {{cell ? '' : 'empty-cell'}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
+              <block wx:if="{{cell}}">
+                <view class="kana">{{cell.kana}}</view>
+                <view class="romaji">{{cell.romaji}}</view>
+              </block>
+            </view>
+          </block>
+        </view>
+      </block>
+    </block>
+  </view>
+  
+  <!-- 播放状态提示 -->
+  <view class="playing-status" wx:if="{{isPlaying}}">
+    <text>正在播放...</text>
+  </view>
+</view>
