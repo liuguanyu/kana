@@ -10,6 +10,7 @@ Page({
     katakanaTable: [], // 片假名表格数据
     isPlaying: false, // 是否正在播放
     currentAudio: null, // 当前播放的音频
+    currentPlayingRomaji: '', // 当前正在播放的假名罗马音
   },
 
   onLoad: function() {
@@ -263,8 +264,22 @@ Page({
       });
     });
     
+    // 设置当前播放的假名
+    this.setData({
+      currentPlayingRomaji: romaji
+    });
+    
     // 播放音频
     audioContext.play();
+    
+    // 音频播放结束时清除当前播放的假名
+    audioContext.onEnded(() => {
+      if (this.data.currentPlayingRomaji === romaji) {
+        this.setData({
+          currentPlayingRomaji: ''
+        });
+      }
+    });
     
     // 更新当前音频
     this.setData({
@@ -299,7 +314,8 @@ Page({
       } else {
         // 播放完成
         this.setData({
-          isPlaying: false
+          isPlaying: false,
+          currentPlayingRomaji: ''
         });
       }
     };

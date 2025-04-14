@@ -91,9 +91,9 @@
           
           <!-- 行内容 -->
           <block wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
-            <view class="table-cell {{cell ? '' : 'empty-cell'}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
+            <view class="table-cell {{cell ? '' : 'empty-cell'}} {{cell && cell.romaji === currentPlayingRomaji ? 'playing-cell' : ''}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
               <block wx:if="{{cell}}">
-                <view class="kana">{{cell.kana}}</view>
+                <view class="kana {{cell.romaji === currentPlayingRomaji ? 'playing-kana' : ''}}">{{cell.kana}}</view>
                 <view class="romaji">{{cell.romaji}}</view>
               </block>
             </view>
@@ -145,9 +145,9 @@
           
           <!-- 行内容 -->
           <block wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
-            <view class="table-cell {{cell ? '' : 'empty-cell'}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
+            <view class="table-cell {{cell ? '' : 'empty-cell'}} {{cell && cell.romaji === currentPlayingRomaji ? 'playing-cell' : ''}}" bindtap="{{cell ? 'playKana' : ''}}" data-romaji="{{cell.romaji}}">
               <block wx:if="{{cell}}">
-                <view class="kana">{{cell.kana}}</view>
+                <view class="kana {{cell.romaji === currentPlayingRomaji ? 'playing-kana' : ''}}">{{cell.kana}}</view>
                 <view class="romaji">{{cell.romaji}}</view>
               </block>
             </view>

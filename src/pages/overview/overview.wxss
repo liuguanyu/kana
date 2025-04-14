@@ -169,6 +169,20 @@
   color: #4a6dff;
 }
 
+/* 正在播放的假名样式 */
+.playing-cell {
+  background-color: rgba(74, 109, 255, 0.1);
+  box-shadow: 0 0 8rpx rgba(74, 109, 255, 0.5);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.playing-kana {
+  color: #4a6dff;
+  font-weight: bold;
+  text-shadow: 0 0 5rpx rgba(74, 109, 255, 0.3);
+}
+
 /* 播放状态提示 */
 .playing-status {
   position: fixed;
